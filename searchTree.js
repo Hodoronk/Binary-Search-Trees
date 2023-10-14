@@ -37,14 +37,14 @@ class Tree {
     insert(value, root) {
         if(root === null) {
             return new Node(value);
-        }if(value === root.value) {
+        }else if(value == root.value) {
             console.log("Value already exists inside Binary Search Tree")
             return root
         }
-        if(value > root.value){
+        if(value < root.value){
             root.right = this.insert(value, root.right)
         }else{
-            root.right = this.insert(value, root.left)
+            root.left = this.insert(value, root.left)
         }
         return root
     }
@@ -54,21 +54,18 @@ class Tree {
 const myArray = [42, 17, 68, 23, 55, 8, 37, 91, 13, 62];
 const myTree = new Tree(myArray);
 myTree.buildTree(myArray);
-myTree.insert(23, myTree.root)
+
+myTree.insert(8, myTree.root)
 
 
-// const prettyPrint = (node, prefix = "", isLeft = true) => { prettyPrint function from the Odin Project
-//     if (node === null) {
-//       return;
-//     }
-//     if (node.right !== null) {
-//       prettyPrint(node.right, `${prefix}${isLeft ? "│   " : "    "}`, false);
-//     }
-//     console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.value}`);
-//     if (node.left !== null) {
-//       prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
-//     }
-//   };
+function prettyPrint(root, prefix = "", isLeft = true) {
+    if (root) {
+        prettyPrint(root.right, prefix + (isLeft ? "│   " : "    "), false);
+        console.log(prefix + (isLeft ? "└── " : "┌── ") + root.value);
+        prettyPrint(root.left, prefix + (isLeft ? "    " : "│   "), true);
+    }
+}
+
 
   prettyPrint(myTree.root)
 

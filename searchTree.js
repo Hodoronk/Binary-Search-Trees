@@ -48,39 +48,21 @@ class Tree {
         }
         return root
     }
-    delete(value, root, parentNode, direction) {
-        if(value === root.value && root.right !== null && root.left !== null) {
-           if(direction === 'right') {
-            parentNode.right = root.left
-            root.left.left = root.right
-            root.right = null
-            root.left = null
-           } else {
-            parentNode.left = root.right
-            root.right.left = root.left
-            root.right = null
-            root.left = null
-           }
+    delete(value, root) {
+        if (root.value === null) {
+            console.log("Node was not found")
+            return root
+        }
 
-            } else if (value === root.value && root.right !== null && root.left === null || root.right === null && root.left !== null) {
-            if(parentNode && root.right && parentNode.value > root.right.value) {
-                parentNode.left = root.right
-            } else {
-                parentNode.right = root.left
-            }
-
-        } else if (value === root.value && root.right === null && root.left === null) {
-                if(direction === 'right') {
-                    parentNode.right = null
-                } else {
-                    parentNode.left = null
-                }
-                return null;
+        if (value > root.value) {
+            root.right = this.delete(value, root.right)
+        } else if (value < root.value) {
+            root.left = this.delete(value, root.left)
         } else {
-            if(value < root.value) {
-                this.delete(value, root.right, root, 'right')
-            } else {
-                this.delete(value, root.left, root, 'left')
+            if (root.left === null) {
+                return root.right
+            } else if (root.right === null) {
+                return root.left
             }
         }
     }

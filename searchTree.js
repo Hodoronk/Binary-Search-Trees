@@ -48,14 +48,57 @@ class Tree {
         }
         return root
     }
-}
+    delete(value, root, parentNode, direction) {
+        if(value === root.value && root.right !== null && root.left !== null) {
+           if(direction === 'right') {
+            parentNode.right = root.left
+            root.left.left = root.right
+            root.right = null
+            root.left = null
+           } else {
+            parentNode.left = root.right
+            root.right.left = root.left
+            root.right = null
+            root.left = null
+           }
+
+            } else if (value === root.value && root.right !== null && root.left === null || root.right === null && root.left !== null) {
+            if(parentNode && root.right && parentNode.value > root.right.value) {
+                parentNode.left = root.right
+            } else {
+                parentNode.right = root.left
+            }
+
+        } else if (value === root.value && root.right === null && root.left === null) {
+                if(direction === 'right') {
+                    parentNode.right = null
+                } else {
+                    parentNode.left = null
+                }
+                return null;
+        } else {
+            if(value < root.value) {
+                this.delete(value, root.right, root, 'right')
+            } else {
+                this.delete(value, root.left, root, 'left')
+            }
+        }
+    }
+    }
+
 
 
 const myArray = [42, 17, 68, 23, 55, 8, 37, 91, 13, 62];
 const myTree = new Tree(myArray);
 myTree.buildTree(myArray);
 
-myTree.insert(8, myTree.root)
+
+myTree.delete(68, myTree.root)
+myTree.delete(91, myTree.root)
+myTree.delete(62, myTree.root)
+// myTree.delete(2001, myTree.root) THIS does not work
+// myTree.delete(55, myTree.root) works as expected, has 1 child
+
 
 
 function prettyPrint(root, prefix = "", isLeft = true) {

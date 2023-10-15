@@ -78,6 +78,13 @@ class Tree {
             return this.findMin(root.left)
         }
     }
+    findMax(root) {
+        if(root.right === null) {
+            return root.value
+        } else {
+            return this.findMax(root.right)
+        }
+    }
 
     find(root, value){
         if(root.value === value) {
@@ -124,6 +131,51 @@ class Tree {
         depth = finder(this.root, value, depth = 0)
         return console.log(`Depth is : ${depth}`) ;
     }
+
+
+    height(root, value) {
+        
+    }
+
+    inorder(root) { //left root right
+        const visited = []
+        const traverse = (root) => {
+            if(root !== null) {
+                traverse(root.left)
+                visited.push(root.value)
+                traverse(root.right)
+            }
+        }
+       traverse(this.root)
+       return console.log(`in order visit: ${visited}`)
+
+    }
+
+    preorder(root){ // root left right
+        const visited = []
+        const traverse = (root) => {
+            if(root !== null) {
+                visited.push(root.value)
+                traverse(root.left)
+                traverse(root.right)
+            }
+        }
+        traverse(this.root)
+        return console.log(`pre order visit : ${visited}`)
+
+    }
+    postorder() { // left right root
+        const visited = []
+        const traverse = (root) => {
+            if(root !== null) {
+                traverse(root.left)
+                traverse(root.right)
+                visited.push(root.value)
+            }
+        }
+        traverse(this.root)
+        return console.log(`post order visit: ${visited}`)
+    }
 }
 
 
@@ -144,6 +196,12 @@ function prettyPrint(root, prefix = "", isLeft = true) {
 
 myTree.levelOrder()
     myTree.depth(myTree.root, 6)
+    console.log(myTree.findMin(myTree.root))
+    console.log(myTree.findMax(myTree.root))
+
+    myTree.inorder(myTree.root)
+    myTree.preorder(myTree.root)
+    myTree.postorder(myTree.root)
   prettyPrint(myTree.root)
   myTree.find(myTree.root, 2)
 

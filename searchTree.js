@@ -113,7 +113,7 @@ class Tree {
             }
         }
        
-        return console.log(elements)
+        return elements
     }
     depth(root, value) {
         let depth
@@ -129,11 +129,29 @@ class Tree {
             }
         }
         depth = finder(this.root, value, depth = 0)
-        return console.log(`Depth is : ${depth}`) ;
+        return console.log(`The depth of ${value} is : ${depth}`) ;
     }
 
 
     height(root, value) {
+        let height;
+        const array = this.levelOrder();
+        let deepest = array[array.length - 1];
+        
+        const goDeep = (node, target, height = 0) => {
+            if (node.value === target) {
+                return height;
+            } else {
+                if (target > node.value) {
+                    return goDeep(node.right, target, height + 1);
+                } else {
+                    return goDeep(node.left, target, height + 1);
+                }
+            }
+        }
+    
+        return console.log(`The height of ${value} is : ${goDeep(this.root, deepest, height = 0)}`)
+
         
     }
 
@@ -176,6 +194,7 @@ class Tree {
         traverse(this.root)
         return console.log(`post order visit: ${visited}`)
     }
+
 }
 
 
@@ -198,10 +217,10 @@ myTree.levelOrder()
     myTree.depth(myTree.root, 6)
     console.log(myTree.findMin(myTree.root))
     console.log(myTree.findMax(myTree.root))
-
     myTree.inorder(myTree.root)
     myTree.preorder(myTree.root)
     myTree.postorder(myTree.root)
+console.log(myTree.height(myTree.root, 6))
   prettyPrint(myTree.root)
   myTree.find(myTree.root, 2)
 

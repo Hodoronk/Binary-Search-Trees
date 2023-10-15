@@ -63,23 +63,28 @@ class Tree {
                 return root.right
             } else if (root.right === null) {
                 return root.left
+            } else {                                                //case where neither are null
+                root.value = this.findMin(root.right)
+                root.right = this.delete(root.value, root.right)
             }
         }
         return root
     }
+
+    findMin(root) {                         // function that finds the minimum value in the subtree
+        if (root.left === null) {
+            return root.value
+        } else {
+            return this.findMin(root.left)
+        }
+    }
     }
 
 
 
-const myArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const myArray = [2, 3, 4, 5, 6, 7, 8, 9, 10];
 const myTree = new Tree(myArray);
 myTree.buildTree(myArray);
-
-
-// myTree.delete(68, myTree.root)
-// myTree.delete(91, myTree.root)
-// myTree.delete(62, myTree.root)
-
 
 
 function prettyPrint(root, prefix = "", isLeft = true) {
@@ -90,15 +95,21 @@ function prettyPrint(root, prefix = "", isLeft = true) {
     }
 }
 
-myTree.delete(5, myTree.root)
-myTree.delete(4, myTree.root)
-myTree.delete(1, myTree.root)
-myTree.delete(2, myTree.root)
+
 myTree.delete(8, myTree.root)
 myTree.insert(5, myTree.root)
 myTree.insert(100, myTree.root)
 myTree.insert(20054, myTree.root)
+myTree.insert (8, myTree.root)
+myTree.insert(7.5, myTree.root)
+myTree.insert(8.1, myTree.root)
+myTree.insert(6.9, myTree.root)
+myTree.delete(6, myTree.root)
+myTree.delete(6.9, myTree.root)
+myTree.delete(7, myTree.root)
+myTree.delete(7.5, myTree.root)
   prettyPrint(myTree.root)
+  console.log(myTree.findMin(myTree.root))
 
 
 

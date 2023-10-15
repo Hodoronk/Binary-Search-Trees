@@ -90,7 +90,25 @@ class Tree {
             }
         }
     }
+    levelOrder(){
+        let queue = [this.root]
+        const elements = []
+
+        while(queue.length > 0) {
+            let current = queue.shift()
+            elements.push(current.value)
+
+            if(current.left) {
+                queue.push(current.left)
+            }
+            if(current.right) {
+                queue.push(current.right)
+            }
+        }
+       
+        return console.log(elements)
     }
+}
 
 
 
@@ -108,8 +126,8 @@ function prettyPrint(root, prefix = "", isLeft = true) {
 }
 
 
+myTree.levelOrder()
 
-console.log(myTree.find(myTree.root, 2))
   prettyPrint(myTree.root)
   myTree.find(myTree.root, 2)
 

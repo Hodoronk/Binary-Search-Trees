@@ -63,7 +63,7 @@ class Tree {
                 return root.right
             } else if (root.right === null) {
                 return root.left
-            } else {                                                //case where neither are null
+            } else {                                               
                 root.value = this.findMin(root.right)
                 root.right = this.delete(root.value, root.right)
             }
@@ -71,7 +71,7 @@ class Tree {
         return root
     }
 
-    findMin(root) {                         // function that finds the minimum value in the subtree
+    findMin(root) {                        
         if (root.left === null) {
             return root.value
         } else {
@@ -108,6 +108,31 @@ class Tree {
        
         return console.log(elements)
     }
+    height(root, value) {
+        let height = 0;
+
+        function finder(target, root, height) {
+            if (!root) {
+                return -1;
+            } 
+            if (root.value === target) {
+                return height
+            } else {
+                if(target > root.value) {
+                    return finder(target, root.right, height + 1)
+                } else {
+                    return finder (target, root.left, height + 1)
+                }
+            }
+            
+
+        }
+    
+        height = finder(root, value, height);
+    
+        return console.log(height)
+        
+    }
 }
 
 
@@ -127,7 +152,7 @@ function prettyPrint(root, prefix = "", isLeft = true) {
 
 
 myTree.levelOrder()
-
+    myTree.height(myTree.root, 7)
   prettyPrint(myTree.root)
   myTree.find(myTree.root, 2)
 

@@ -28,8 +28,8 @@ class Tree {
             const middleNode = Math.floor(array.length / 2) ;
             const root = new Node(array[middleNode])
     
-            root.right = this.buildTree(array.slice(0, middleNode))
-            root.left = this.buildTree(array.slice(middleNode + 1))
+            root.left = this.buildTree(array.slice(0, middleNode))
+            root.right = this.buildTree(array.slice(middleNode + 1))
     
             return root;
         }
@@ -41,15 +41,15 @@ class Tree {
             console.log("Value already exists inside Binary Search Tree")
             return root
         }
-        if(value < root.value){
+        if(value > root.value){
             root.right = this.insert(value, root.right)
-        }else{
+        }else if (value < root.value){
             root.left = this.insert(value, root.left)
         }
         return root
     }
     delete(value, root) {
-        if (root.value === null) {
+        if (root === null) {
             console.log("Node was not found")
             return root
         }
@@ -65,21 +65,20 @@ class Tree {
                 return root.left
             }
         }
+        return root
     }
     }
 
 
 
-const myArray = [42, 17, 68, 23, 55, 8, 37, 91, 13, 62];
+const myArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 const myTree = new Tree(myArray);
 myTree.buildTree(myArray);
 
 
-myTree.delete(68, myTree.root)
-myTree.delete(91, myTree.root)
-myTree.delete(62, myTree.root)
-// myTree.delete(2001, myTree.root) THIS does not work
-// myTree.delete(55, myTree.root) works as expected, has 1 child
+// myTree.delete(68, myTree.root)
+// myTree.delete(91, myTree.root)
+// myTree.delete(62, myTree.root)
 
 
 
@@ -91,7 +90,15 @@ function prettyPrint(root, prefix = "", isLeft = true) {
     }
 }
 
-
+myTree.delete(5, myTree.root)
+myTree.delete(4, myTree.root)
+myTree.delete(1, myTree.root)
+myTree.delete(2, myTree.root)
+myTree.delete(8, myTree.root)
+myTree.insert(5, myTree.root)
+myTree.insert(100, myTree.root)
+myTree.insert(20054, myTree.root)
   prettyPrint(myTree.root)
+
 
 

@@ -78,6 +78,18 @@ class Tree {
             return this.findMin(root.left)
         }
     }
+
+    find(root, value){
+        if(root.value === value) {
+            return root
+        } else {
+            if(value > root.value) {
+                return this.find(root.right, value)
+            } else  {
+               return this.find(root.left, value)
+            }
+        }
+    }
     }
 
 
@@ -96,20 +108,11 @@ function prettyPrint(root, prefix = "", isLeft = true) {
 }
 
 
-myTree.delete(8, myTree.root)
-myTree.insert(5, myTree.root)
-myTree.insert(100, myTree.root)
-myTree.insert(20054, myTree.root)
-myTree.insert (8, myTree.root)
-myTree.insert(7.5, myTree.root)
-myTree.insert(8.1, myTree.root)
-myTree.insert(6.9, myTree.root)
-myTree.delete(6, myTree.root)
-myTree.delete(6.9, myTree.root)
-myTree.delete(7, myTree.root)
-myTree.delete(7.5, myTree.root)
+
+console.log(myTree.find(myTree.root, 2))
   prettyPrint(myTree.root)
-  console.log(myTree.findMin(myTree.root))
+  myTree.find(myTree.root, 2)
+
 
 
 

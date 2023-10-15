@@ -108,30 +108,21 @@ class Tree {
        
         return console.log(elements)
     }
-    height(root, value) {
-        let height = 0;
-
-        function finder(target, root, height) {
-            if (!root) {
-                return -1;
-            } 
-            if (root.value === target) {
-                return height
+    depth(root, value) {
+        let depth
+        function finder(root, value, depth = 0) {
+            if(value === root.value) {
+                return depth
             } else {
-                if(target > root.value) {
-                    return finder(target, root.right, height + 1)
+                if(value > root.value) {
+                    return finder (root.right, value , depth + 1)
                 } else {
-                    return finder (target, root.left, height + 1)
+                    return finder (root.left , value, depth + 1)
                 }
             }
-            
-
         }
-    
-        height = finder(root, value, height);
-    
-        return console.log(height)
-        
+        depth = finder(this.root, value, depth = 0)
+        return console.log(`Depth is : ${depth}`) ;
     }
 }
 
@@ -152,7 +143,7 @@ function prettyPrint(root, prefix = "", isLeft = true) {
 
 
 myTree.levelOrder()
-    myTree.height(myTree.root, 7)
+    myTree.depth(myTree.root, 6)
   prettyPrint(myTree.root)
   myTree.find(myTree.root, 2)
 

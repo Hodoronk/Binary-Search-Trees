@@ -208,6 +208,22 @@ class Tree {
     }
 
     isBalanced(root){
+        let leftNode = this.root.left.value
+        let rightNode = this.root.right.value
+        
+
+        let heightL = this.height(leftNode)
+        let heightR = this.height(rightNode)
+        console.log(`heightL = ${heightL}`)
+        console.log(`heightR =  ${heightR}`)
+        let isBalanced;
+         if (Math.abs(heightL - heightR) > 1) {
+            return false
+         } else {
+            return true
+         }
+
+      
 
     }
 
@@ -240,14 +256,11 @@ function prettyPrint(root, prefix = "", isLeft = true) {
     // myTree.inorder(myTree.root)
     // myTree.preorder(myTree.root)
     // myTree.postorder(myTree.root)
-    console.log(`Height of 7 is: ${myTree.height(7)}`)
+    myTree.insert(11, myTree.root)
+    myTree.insert(12, myTree.root)
+    myTree.insert(13, myTree.root)
 
-
-    // myTree.isBalanced(myTree.root)
-    // myTree.isBalanced(myTree.head)
-    // myTree.insert(11, myTree.root)
-    // myTree.insert(12, myTree.root)
-    // myTree.insert(13, myTree.root)
+    console.log(`Balanced? ` , myTree.isBalanced(myTree.root))
 
 
   prettyPrint(myTree.root)

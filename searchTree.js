@@ -222,8 +222,7 @@ class Tree {
 }
 
 const myArray = [2, 3, 4, 5, 6, 7, 8, 9, 10];
-const myTree = new Tree(myArray);
-myTree.buildTree(myArray);
+
 
 
 function prettyPrint(root, prefix = "", isLeft = true) {
@@ -236,34 +235,48 @@ function prettyPrint(root, prefix = "", isLeft = true) {
 
 
 
-    myTree.depth(myTree.root, 6)
-    myTree.levelOrder(myTree.root)
-    console.log(`level order traversal from leftwards element: ${myTree.levelOrder(myTree.find(4))}`)
-    console.log(`myTree.find(4) = ${myTree.find(myTree.root, 4)}`)
+const randomArray = [
+    56, 78, 92, 12, 44, 3, 19, 67, 35, 88, 7, 60, 25, 53, 30, 98, 41, 87, 9, 63,
+    71, 16, 50, 86, 11, 76, 72, 14, 80, 48, 2, 28, 68, 37, 59, 26, 49, 22, 85, 64,
+    4, 97, 8, 69, 45, 31, 75, 5, 99, 29, 61, 38, 91, 74, 17, 51, 18, 83, 23, 55,
+    47, 27, 70, 15, 43, 90, 33, 66, 6, 77, 58, 1, 39, 82, 24, 46, 73, 13, 32, 81,
+    54, 21, 42, 95, 20, 62, 36, 84, 10, 52, 89, 34, 57, 40, 65, 94, 70
+  ]
+  const myTree = new Tree(randomArray)
+  myTree.buildTree(randomArray)
 
-    console.log(`Find Min : ${myTree.findMin(myTree.root)}`)
-    console.log(`Find max: ${myTree.findMax(myTree.root)}`)
-    myTree.inorder(myTree.root)
-    myTree.preorder(myTree.root)
-    myTree.postorder(myTree.root)
-    
-    
-    
-    myTree.insert(11, myTree.root)
-    myTree.insert(12, myTree.root)
-    myTree.insert(13, myTree.root)
-    
-        console.log(`BEFORE REBALANCING`)
-        prettyPrint(myTree.root)
-        console.log(`Balanced? ` , myTree.isBalanced(myTree.root))
+  console.log(`Is it balanced? ${myTree.isBalanced(myTree.root)}`)
+  console.log(`Inorder: ${myTree.inorder(myTree.root)}`)
+  console.log(`Preorder: ${myTree.preorder(myTree.root)}`)
+  console.log(`Postorder: ${myTree.postorder(myTree.root)}`)
 
-    myTree.rebalance(myTree.root);
-    console.log(`AFTER REBALANCING`)
-    prettyPrint(myTree.root)
-    console.log(`Balanced? ` , myTree.isBalanced(myTree.root))
+  // Unbalancing
+  myTree.insert(101, myTree.root)
+  myTree.insert(102, myTree.root)
+  myTree.insert(103, myTree.root)
+  myTree.insert(104, myTree.root)
+  myTree.insert(105, myTree.root)
+  console.log(`Is it balanced? ${myTree.isBalanced(myTree.root)}`) //returns false
+  prettyPrint(myTree.root)
+
+  console.log(`REBALANCING IS DONE HERE`)
+
+  myTree.rebalance(myTree.root)
+  console.log(`Is it balanced? ${myTree.isBalanced(myTree.root)}`) //returns true
+
+  // printing all elements again in all 3 orders
+
+  console.log(`Inorder: ${myTree.inorder(myTree.root)}`)
+  console.log(`Preorder: ${myTree.preorder(myTree.root)}`)
+  console.log(`Postorder: ${myTree.postorder(myTree.root)}`)
+  prettyPrint(myTree.root)
 
 
 
 
 
+
+
+
+  
 

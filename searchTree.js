@@ -15,9 +15,6 @@ class Node {
     }
 }
 
-
-
-
 class Tree {
     constructor(array){
         this.root = this.buildTree(array)
@@ -73,7 +70,6 @@ class Tree {
         }
         return root
     }
-
     goDeep(node, target, height) {
         if (node === null) {
             return false;
@@ -88,7 +84,6 @@ class Tree {
             }
         }
     }
-
     findMin(root) {                        
         if (root.left === null) {
             return root.value
@@ -103,7 +98,6 @@ class Tree {
             return this.findMax(root.right)
         }
     }
-
     find(root, value){
         if(root.value === value) {
             return root
@@ -151,8 +145,6 @@ class Tree {
         depth = finder(this.root, value, depth = 0)
         return console.log(`The depth of ${value} is : ${depth}`) ;
     }
-
-
     height(value) {
         const foundNode = this.find(this.root, value);
         
@@ -166,7 +158,6 @@ class Tree {
         }
         return height
     }
-
     inorder(root) { 
         const visited = []
         const traverse = (root) => {
@@ -177,10 +168,9 @@ class Tree {
             }
         }
        traverse(this.root)
-       return console.log(`Inorder Traversal: ${visited}`)
+       return visited
 
     }
-
     preorder(root){ // root left right
         const visited = []
         const traverse = (root) => {
@@ -191,7 +181,7 @@ class Tree {
             }
         }
         traverse(this.root)
-        return console.log(`Preorder traversal : ${visited}`)
+        return visited
 
     }
     postorder() { // left right root
@@ -204,14 +194,9 @@ class Tree {
             }
         }
         traverse(this.root)
-        return console.log(`Postorder traversal:  ${visited}`)
+        return visited
     }
-
     isBalanced(root){
-        // let leftNode = this.root.left.value
-        // let rightNode = this.root.right.value
-        
-
         let heightL = this.height(this.root.left.value)
         let heightR = this.height(this.root.right.value)
          if (Math.abs(heightL - heightR) > 1) {
@@ -219,10 +204,20 @@ class Tree {
          } else {
             return true
          }
+    }
+    rebalance(root) {
+        let isBalanced = this.isBalanced(this.root)
+        if(isBalanced === false) {
+            const unsorted = this.inorder(root)
+            const sorted = sortArray(unsorted);
+            this.root = this.buildTree(sorted)
 
-      
+        } else {
+            return console.log('Tree is already balanced')
+        }
 
     }
+
 
 }
 
@@ -241,24 +236,32 @@ function prettyPrint(root, prefix = "", isLeft = true) {
 
 
 
-    // myTree.depth(myTree.root, 6)
-    // myTree.levelOrder(myTree.root)
-    // console.log(`level order traversal from leftwards element: ${myTree.levelOrder(myTree.find(4))}`)
-    // console.log(`myTree.find(4) = ${myTree.find(myTree.root, 4)}`)
+    myTree.depth(myTree.root, 6)
+    myTree.levelOrder(myTree.root)
+    console.log(`level order traversal from leftwards element: ${myTree.levelOrder(myTree.find(4))}`)
+    console.log(`myTree.find(4) = ${myTree.find(myTree.root, 4)}`)
 
-    // console.log(`Find Min : ${myTree.findMin(myTree.root)}`)
-    // console.log(`Find max: ${myTree.findMax(myTree.root)}`)
-    // myTree.inorder(myTree.root)
-    // myTree.preorder(myTree.root)
-    // myTree.postorder(myTree.root)
-    // myTree.insert(11, myTree.root)
-    // myTree.insert(12, myTree.root)
-    // myTree.insert(13, myTree.root)
+    console.log(`Find Min : ${myTree.findMin(myTree.root)}`)
+    console.log(`Find max: ${myTree.findMax(myTree.root)}`)
+    myTree.inorder(myTree.root)
+    myTree.preorder(myTree.root)
+    myTree.postorder(myTree.root)
+    
+    
+    
+    myTree.insert(11, myTree.root)
+    myTree.insert(12, myTree.root)
+    myTree.insert(13, myTree.root)
+    
+        console.log(`BEFORE REBALANCING`)
+        prettyPrint(myTree.root)
+        console.log(`Balanced? ` , myTree.isBalanced(myTree.root))
 
+    myTree.rebalance(myTree.root);
+    console.log(`AFTER REBALANCING`)
+    prettyPrint(myTree.root)
     console.log(`Balanced? ` , myTree.isBalanced(myTree.root))
 
-
-  prettyPrint(myTree.root)
 
 
 

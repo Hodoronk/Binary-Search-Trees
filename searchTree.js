@@ -15,6 +15,9 @@ class Node {
     }
 }
 
+
+
+
 class Tree {
     constructor(array){
         this.root = this.buildTree(array)
@@ -71,6 +74,21 @@ class Tree {
         return root
     }
 
+    goDeep(node, target, height) {
+        if (node === null) {
+            return false;
+        }
+        if (node.value === target) {
+            return height;
+        } else {
+            if (target > node.value) {
+                return this.goDeep(node.right, target, height + 1);
+            } else {
+                return this.goDeep(node.left, target, height + 1);
+            }
+        }
+    }
+
     findMin(root) {                        
         if (root.left === null) {
             return root.value
@@ -97,11 +115,13 @@ class Tree {
             }
         }
     }
-    levelOrder(){
-        let queue = [this.root]
+    levelOrder(root){
+
+        let queue = [root]
         const elements = []
 
         while(queue.length > 0) {
+
             let current = queue.shift()
             elements.push(current.value)
 
@@ -133,29 +153,21 @@ class Tree {
     }
 
 
-    height(root, value) {
-        let height;
-        const array = this.levelOrder();
-        let deepest = array[array.length - 1];
+    height(value) {
+        const foundNode = this.find(this.root, value);
         
-        const goDeep = (node, target, height = 0) => {
-            if (node.value === target) {
-                return height;
-            } else {
-                if (target > node.value) {
-                    return goDeep(node.right, target, height + 1);
-                } else {
-                    return goDeep(node.left, target, height + 1);
-                }
-            }
+        if (foundNode) {
+            const levelOrderResult = this.levelOrder(foundNode);
+            let deepest = levelOrderResult[levelOrderResult.length - 1]
+            let height =  this.goDeep(foundNode, deepest, 0)
+            return height
+        } else {
+            console.log('Node not found');
         }
-    
-        return console.log(`The height of ${value} is : ${goDeep(this.root, deepest, height = 0)}`)
-
-        
+        return height
     }
 
-    inorder(root) { //left root right
+    inorder(root) { 
         const visited = []
         const traverse = (root) => {
             if(root !== null) {
@@ -165,7 +177,7 @@ class Tree {
             }
         }
        traverse(this.root)
-       return console.log(`in order visit: ${visited}`)
+       return console.log(`Inorder Traversal: ${visited}`)
 
     }
 
@@ -179,7 +191,7 @@ class Tree {
             }
         }
         traverse(this.root)
-        return console.log(`pre order visit : ${visited}`)
+        return console.log(`Preorder traversal : ${visited}`)
 
     }
     postorder() { // left right root
@@ -192,7 +204,11 @@ class Tree {
             }
         }
         traverse(this.root)
-        return console.log(`post order visit: ${visited}`)
+        return console.log(`Postorder traversal:  ${visited}`)
+    }
+
+    isBalanced(root){
+
     }
 
 }
@@ -213,16 +229,29 @@ function prettyPrint(root, prefix = "", isLeft = true) {
 }
 
 
-myTree.levelOrder()
-    myTree.depth(myTree.root, 6)
-    console.log(myTree.findMin(myTree.root))
-    console.log(myTree.findMax(myTree.root))
-    myTree.inorder(myTree.root)
-    myTree.preorder(myTree.root)
-    myTree.postorder(myTree.root)
-console.log(myTree.height(myTree.root, 6))
+
+    // myTree.depth(myTree.root, 6)
+    // myTree.levelOrder(myTree.root)
+    // console.log(`level order traversal from leftwards element: ${myTree.levelOrder(myTree.find(4))}`)
+    // console.log(`myTree.find(4) = ${myTree.find(myTree.root, 4)}`)
+
+    // console.log(`Find Min : ${myTree.findMin(myTree.root)}`)
+    // console.log(`Find max: ${myTree.findMax(myTree.root)}`)
+    // myTree.inorder(myTree.root)
+    // myTree.preorder(myTree.root)
+    // myTree.postorder(myTree.root)
+    console.log(`Height of 7 is: ${myTree.height(7)}`)
+
+
+    // myTree.isBalanced(myTree.root)
+    // myTree.isBalanced(myTree.head)
+    // myTree.insert(11, myTree.root)
+    // myTree.insert(12, myTree.root)
+    // myTree.insert(13, myTree.root)
+
+
   prettyPrint(myTree.root)
-  myTree.find(myTree.root, 2)
+
 
 
 

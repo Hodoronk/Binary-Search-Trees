@@ -8,7 +8,7 @@ A Binary Search Tree (BST) is a data structure that organizes data elements in a
 - BST Creation: Create a BST from a sorted or unsorted array.
 - Insertion: Insert a new node into the BST.
 - Deletion: Delete a node from the BST.
-- Traversal: Perform in-order, pre-order, and post-order traversals.
+- Traversal: Perform in-order, pre-order, post-order and breadth-first traversals.
 - Balancing: Check if the tree is balanced and rebalance it if needed.
 - Depth and Height Calculation: Find the depth and height of a node in the tree.
 

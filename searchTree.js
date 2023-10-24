@@ -237,18 +237,13 @@ function prettyPrint(root, prefix = "", isLeft = true) {
 
 const randomArray = [
     56, 78, 92, 12, 44, 3, 19, 67, 35, 88, 7, 60, 25, 53, 30, 98, 41, 87, 9, 63,
-    71, 16, 50, 86, 11, 76, 72, 14, 80, 48, 2, 28, 68, 37, 59, 26, 49, 22, 85, 64,
-    4, 97, 8, 69, 45, 31, 75, 5, 99, 29, 61, 38, 91, 74, 17, 51, 18, 83, 23, 55,
-    47, 27, 70, 15, 43, 90, 33, 66, 6, 77, 58, 1, 39, 82, 24, 46, 73, 13, 32, 81,
-    54, 21, 42, 95, 20, 62, 36, 84, 10, 52, 89, 34, 57, 40, 65, 94, 70
-  ]
+    71, 16, 50, 86, 11, 76, 72, 14, 80, 48, 2, 28, 68, 37, 59]
   const myTree = new Tree(randomArray)
   myTree.buildTree(randomArray)
 
-  console.log(`Is it balanced? ${myTree.isBalanced(myTree.root)}`)
-  console.log(`Inorder: ${myTree.inorder(myTree.root)}`)
-  console.log(`Preorder: ${myTree.preorder(myTree.root)}`)
-  console.log(`Postorder: ${myTree.postorder(myTree.root)}`)
+  console.log(`Inorder traversal: ${myTree.inorder(myTree.root)}`)
+  console.log(`Preorder traversal: ${myTree.preorder(myTree.root)}`)
+  console.log(`Postorder traversal: ${myTree.postorder(myTree.root)}`)
 
   // Unbalancing
   myTree.insert(101, myTree.root)
@@ -266,9 +261,9 @@ const randomArray = [
 
   // printing all elements again in all 3 orders
 
-  console.log(`Inorder: ${myTree.inorder(myTree.root)}`)
-  console.log(`Preorder: ${myTree.preorder(myTree.root)}`)
-  console.log(`Postorder: ${myTree.postorder(myTree.root)}`)
+  console.log(`Inorder traversal: ${myTree.inorder(myTree.root)}`)
+  console.log(`Preorder traversal: ${myTree.preorder(myTree.root)}`)
+  console.log(`Postorder traversal: ${myTree.postorder(myTree.root)}`)
   prettyPrint(myTree.root)
 
 
